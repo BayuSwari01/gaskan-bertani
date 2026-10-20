@@ -5,15 +5,17 @@ crops on plots (with withering and fertilizer), fruit trees, and animals (ayam, 
 raised with milk bottles and then fed to produce goods. It is built with Three.js in low-poly 3D under a
 fixed isometric camera, runs offline, saves to localStorage, and all in-game text is Bahasa Indonesia.
 
-The full specification is the `## Specification` section at the top of `todo.md` (§1–§12). The work
-plan is the sprints below it. `docs/decisions.md` is the append-only decision log; `docs/spec.md` only
-points to `todo.md`.
+The specification lives in `docs/` (index: `docs/README.md`). `docs/spec/NN-*.md` holds §1–§12, the
+normative rules; `docs/game-design.md`, `docs/visual-guide.md`, `docs/glossary.md` and
+`docs/research-farmville2.md` explain the intent; `docs/decisions.md` is the append-only decision log.
+The work plan is `todo.md`: sprints of checkbox tasks that refer to the specification as §N.
 
 ## Read first, every session
 
 1. This file.
-2. `todo.md`: the whole `## Specification`, then your assigned sprint including its `### Fix` items.
-3. `docs/decisions.md`.
+2. `docs/README.md`, then every file in `docs/` (the game design and visual guide first, then
+   `docs/spec/` §1–§12, then `docs/decisions.md`).
+3. `todo.md`: the header and your assigned sprint, including its `### Fix` items.
 4. The reports your role needs (`coder-report.md`, `tester-report.md`).
 
 ## Tech stack
@@ -67,6 +69,10 @@ points to `todo.md`.
 - Files stay under 300 lines; no `any`, no `as unknown as`, no non-null `!`, no enums.
 - When the specification is silent, choose the simplest consistent option and append a dated line to
   `docs/decisions.md`.
+- `docs/spec/` wins over every other document. Code follows the spec; never rewrite the spec to match
+  code. Change it only when a task or Fix item asks, or when a deviation is unavoidable; then update
+  the affected lines in the same commit and log the reason in `docs/decisions.md` (append-only).
+- Never put checkboxes in `docs/`; tasks belong in `todo.md`.
 
 ## Testing rules
 
@@ -86,7 +92,8 @@ points to `todo.md`.
 - Tester: run `npm run doctor`, `npm run check:all` and `npm run test:coverage`; look at every new
   screenshot against §7.6; check that earlier sprints still work; run the §10.8 security checklist.
   The last line of `tester-report.md` is exactly `OK` or exactly `NOT OK`.
-- Reviewer: check the sprint's Acceptance list and the §11.2 sprint Definition of Done. Write
-  `DONE.md` only when the §11.3 project Definition of Done holds.
+- Reviewer: check the sprint's Acceptance list and the §11.2 sprint Definition of Done, and check
+  that any change to `docs/spec/` is justified in `docs/decisions.md`. Write `DONE.md` only when the
+  §11.3 project Definition of Done holds.
 - Git: the loop commits after each role. Never rewrite history. Generated folders (`node_modules`,
   `.npm-cache`, `.tmp`, `dist`, `dist-e2e`, `test-artifacts`, `coverage`, `.vitest`) stay gitignored.
